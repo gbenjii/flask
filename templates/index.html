@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: gray;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div>
+                {% for category, message in messages %}
+                    <p class="{{ category }}" style="color: white;">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="/execute_select" method="post">
+        <label for=""><h3 style="color: white;">Lekérdezés az adatbázisból</h3></label><br>
+        <textarea name="command_select" id="" style="width: 600px; height: 100px;">SELECT name FROM sqlite_master WHERE type='table';</textarea>
+        <button>Futtatás</button>
+    </form>
+    <br>
+    <form action="/execute" method="post">
+        <label for=""><h3 style="color: white; padding-bottom: 0;">Adatbázis parancs végrehajtása</h3></label><br>
+        <textarea name="command" id="" style="width: 600px; height: 100px;">CREATE TABLE test(egy, ketto)</textarea>
+        <button>Futtatás</button>
+    </form>
+</body>
+</html>

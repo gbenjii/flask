@@ -11,16 +11,16 @@ from datetime import datetime
 import csv
 
 
-localhost = Flask(__name__)
-localhost.secret_key="benjitest"
+app = Flask(__name__)
+app.secret_key="benjitest"
 
-@localhost.route("/")
+@app.route("/")
 def sql_command():
     con = sqlite3.connect("db/login.db")
     cur = con.cursor()
     return render_template("base.html")
 
-@localhost.route("/execute_select", methods=["POST"])
+@app.route("/execute_select", methods=["POST"])
 def execute_select():
     con = sqlite3.connect("db/login.db")
     cur = con.cursor()
@@ -29,7 +29,7 @@ def execute_select():
     flash(ans.fetchall())
     return redirect(url_for("sql_command"))
 
-@localhost.route("/execute", methods=["POST"])
+@app.route("/execute", methods=["POST"])
 def execute():
     con = sqlite3.connect("db/login.db")
     cur = con.cursor()

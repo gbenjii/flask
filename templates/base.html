@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body style="background-color: gray;">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div>
-                {% for category, message in messages %}
-                    <p class="{{ category }}" style="color: white;">{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
+    <title>{% block title %}Name{% endblock %}</title>
+    {% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> {% endblock %}
+    {% block js %} <script src="{{ url_for('static', filename='main.js') }}"></script> {% endblock %}
 
-    <form action="/execute_select" method="post">
-        <label for=""><h3 style="color: white;">Lekérdezés az adatbázisból</h3></label><br>
-        <textarea name="command_select" id="" style="width: 600px; height: 100px;">SELECT name FROM sqlite_master WHERE type='table';</textarea>
-        <button>Futtatás</button>
-    </form>
-    <br>
-    <form action="/execute" method="post">
-        <label for=""><h3 style="color: white; padding-bottom: 0;">Adatbázis parancs végrehajtása</h3></label><br>
-        <textarea name="command" id="" style="width: 600px; height: 100px;">CREATE TABLE test(egy, ketto)</textarea>
-        <button>Futtatás</button>
-    </form>
+
+    
+
+
+</head>
+<body>
+    <div class="topnav" id="myTopnav">
+        <a href="/" {% block index_a%} class="deactive" {% endblock %}>Főoldal</a>
+        <a href="/imatkozas" {% block elerhetosekek_a%} class="deactive" {% endblock %}>Elérhetőségek</a>
+        <a href="/teremtestortenet" {% block login_a%} class="deactive" {% endblock %}>Login</a>
+        <a href="/hivo/login_page">Bejelentkezés</a>
+
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+            <p class="navbar_line"></p>
+            <p class="navbar_line"></p>
+            <p class="navbar_line"></p>
+        </a>
+    </div>
+    
+    {% block content %}
+
+    {% endblock %}
 </body>
+
 </html>

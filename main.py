@@ -12,7 +12,7 @@ import csv
 
 
 localhost = Flask(__name__)
-localhost.secret_key="asd"
+localhost.secret_key="benjitest"
 
 @localhost.route("/")
 def sql_command():

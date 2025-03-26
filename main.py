@@ -18,7 +18,7 @@ localhost.secret_key="asd"
 def sql_command():
     con = sqlite3.connect("db/login.db")
     cur = con.cursor()
-    return render_template("index.html")
+    return render_template("base.html")
 
 @localhost.route("/execute_select", methods=["POST"])
 def execute_select():
